@@ -6,6 +6,7 @@ if(process.env.NODE_ENV !== 'production'){
 const express = require('express')
 const app = express()
 const expressLayouts = require('express-ejs-layouts')
+const methodOverride = require('method-override')
 // const bodyParser = require('body-parser')
 
 //routers
@@ -19,6 +20,7 @@ app.set('layout', 'layouts/layout')
 app.use(expressLayouts)
 app.use(express.static('public')) //public views
 app.use(express.urlencoded({limit:'10mb', extended:false}))
+app.use(methodOverride('_method'))
 
 const mongoose = require('mongoose')
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser:true})
